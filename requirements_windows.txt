@@ -1,0 +1,13 @@
+# FaceAnything Windows additions
+# Confirmed necessary during Windows setup
+
+moviepy==1.0.3
+addict==2.4.0
+pycolmap>=4.2.1
+evo>=1.37.1
+
+# Optional acceleration
+# triton
+
+# Optional 3D Gaussian Splat rendering
+# gsplat

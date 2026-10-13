@@ -29,6 +29,25 @@ def load_frame_paths(input_path: str, max_frames: int | None = None,
         (frame_paths, fps) where ``fps`` is the source video fps or ``None``.
     """
     if os.path.isdir(input_path):
+
+        # まず動画を探す
+        video_paths = []
+
+        for ext in VIDEO_EXTS:
+            video_paths += glob.glob(os.path.join(input_path, f"*{ext}"))
+            video_paths += glob.glob(os.path.join(input_path, f"*{ext.upper()}"))
+
+        video_paths = sorted(set(video_paths), key=_natural_key)
+
+        if video_paths:
+            return _extract_video_frames(
+                video_paths[0],
+                max_frames,
+                stride,
+                work_dir
+            )
+
+        # 従来の画像探索
         paths = []
         for ext in IMAGE_EXTS:
             paths += glob.glob(os.path.join(input_path, f"*{ext}"))
